@@ -126,20 +126,19 @@ glimpse(enrol)
 ## 1. For every column in the data:
 
 a.  State whether the values match the description given in the table above.
-
 ```{r}
 str(enrol)
 #All the variables has been corrected as per the description
-
 ```
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/552c3a19-ee40-4958-b030-5711fb198863)
 
 b\. State the number of missing values in the column.
 
 ```{r}
 #Number of missing values per column
 colSums(is.na(enrol))
-
 ```
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/d8474db7-5a50-44cd-b0c8-c2c3aff5619f)
 
 c\. Describe what you did to make values match the description if they did not match.
 
@@ -165,10 +164,19 @@ c\. Describe what you did to make values match the description if they did not m
 d1 =enrol %>% 
   group_by(year) %>% 
   summarise(Total_yearly=sum(enrollment_count))
+```
 
+```
 range(d1$Total_yearly)
-hist(d1$Total_yearly, col='orange')
+```
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/1528d4c0-8fdc-4a4d-a2fd-8be9841ea42f)
 
+```
+hist(d1$Total_yearly, col='orange')
+```
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/0e3a87c8-87fe-4623-a389-54b3d423efe3)
+
+```
 p1 <- d1 %>% 
   ggplot(aes(x=factor(year), y=Total_yearly))+
   geom_col(position = 'dodge', fill=rainbow(12)) +
@@ -182,9 +190,9 @@ p1 <- d1 %>%
   coord_flip()
 p1
 ```
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/11a788cb-09ce-413d-a5f3-18aa82553f2f)
 
 The **Range** of the Total enrollment per year is `32696 - 38897,` and the histogram of the Total enrollment shows that the Enrollment Yearly is normally distributed.
-
 ```{r}
 d <- enrol %>% 
      group_by(course_type) %>% 
@@ -231,7 +239,7 @@ p3 <-  d3 %>%
 
 plot_grid(p0, p2, p3, labels = "auto")
 ```
-
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/89332835-4466-45db-ad39-de8721c3b09c)
 **In the above charts.**
 
 -Most students prefer `Online` Classes
@@ -246,6 +254,7 @@ select(starts_with(c('enrol', 'year', 'pre_s', 'post'))) %>%
 cor() %>%
 corrplot(type = "upper", addCoef.col = "black", diag=FALSE)
 ```
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/9b2e3bc5-a2d7-4fe0-9e7c-07ca9c89eaad)
 
 We have the correlation coefficients in each box. Positive correlations are in blue. Negative correlations are in red.
 
@@ -264,6 +273,7 @@ In respect to the above conditions, we can conclude that , the year of enrollmen
 ```{r}
 plot_grid(p0, p2, p3, labels = "auto")
 ```
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/9e4e3873-b740-4c2a-b7da-b2ef9448985e)
 
 a\. State which type of course has the most observations
 
@@ -290,12 +300,15 @@ d %>%
             ) +
   ggtitle('Distribution of Enrollment Per Course Type')
 
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/fa76f3c6-7956-46c4-b770-0fd7a0c4da40)
+
 enrol %>% 
   ggplot(aes(course_type,enrollment_count)) +
   geom_boxplot()
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/f348cbf4-f7ff-4c51-ab87-a60ad5b39843)
 ```
 
-`-Majority of learners prefer Online compared to Classroom ,`
+`-Majority of learners prefer Online compared to Classroom,`
 
 ## 5. The university wants to predict how many students will enroll in a course. State the type of machine learning problem that this is (regression/ classification/ clustering).
 
@@ -308,6 +321,7 @@ enrol %>%
 ```{r}
 names(enrol)
 ```
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/85ee06ae-4327-4bb1-8d54-fbae2c81993b)
 
 ```{r}
 #
@@ -328,7 +342,11 @@ model <- lm(formula = enrollment_count~ scale(year)+scale(pre_score) +
               factor(course_type) + factor(pre_requirement)+
               factor(department),  data=train)
 summary(model)
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/408d7cfc-895e-4c02-bc88-641148bb8168)
+
 report(model)
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/1cf8ee96-e9d3-4de7-b05b-89758bae963d)
+
 pred <- predict(model, test) %>%
   round(0) 
 
