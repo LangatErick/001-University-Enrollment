@@ -1,7 +1,6 @@
 # 001-University-Enrollment
-The university started offering online courses to reach a wider range of students. The university wants you to help them understand enrollment trends. They would like you to identify what contributes to higher enrollment. In particular, whether the course type (online or classroom) is a factor
-
-
+The university started offering online courses to reach a wider range of students. The university wants you to help them understand enrollment trends. They would like you to identify what contributes to higher enrollment. In particular, whether the course type (online or classroom) is a factor.
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/e85d1019-1ab9-427a-abc2-20c83646dc4c)
 
 ## Project_University Enrollment
 
@@ -299,14 +298,15 @@ d %>%
             hjust=-.3
             ) +
   ggtitle('Distribution of Enrollment Per Course Type')
-
+```
 ![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/fa76f3c6-7956-46c4-b770-0fd7a0c4da40)
 
+```
 enrol %>% 
   ggplot(aes(course_type,enrollment_count)) +
   geom_boxplot()
-![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/f348cbf4-f7ff-4c51-ab87-a60ad5b39843)
 ```
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/f348cbf4-f7ff-4c51-ab87-a60ad5b39843)
 
 `-Majority of learners prefer Online compared to Classroom,`
 
@@ -342,18 +342,26 @@ model <- lm(formula = enrollment_count~ scale(year)+scale(pre_score) +
               factor(course_type) + factor(pre_requirement)+
               factor(department),  data=train)
 summary(model)
+```
 ![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/408d7cfc-895e-4c02-bc88-641148bb8168)
 
+```
 report(model)
+```
 ![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/1cf8ee96-e9d3-4de7-b05b-89758bae963d)
 
+```
 pred <- predict(model, test) %>%
   round(0) 
-
 data.frame(Actual=test$enrollment_count,Prediction= pred)
+```
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/9fa59609-77e2-4ec2-a381-e9451b4eb9b1)
+
+```
 caret::RMSE(pred,test$enrollment_count)
 caret::R2(pred,test$enrollment_count)
 ```
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/43371629-30d9-4da9-a3ea-78f6eb2cb2b0)
 
 `The generic interpretation for each of our coefficients is for every one unit increase in the x variable, the y variable (enrollment_count) increases by beta units.`
 
@@ -396,10 +404,11 @@ data.frame(test$enrollment_count, pred2)
 caret::RMSE(pred2,test$enrollment_count)
 caret::R2(pred2,test$enrollment_count)
 ```
+![image](https://github.com/LangatErick/001-University-Enrollment/assets/124883947/218a3457-8448-433f-8de5-b31eacf10d81)
 
 ## 8. Explain why you chose the two models used in parts 6 and 7.
 
-`I choose the Two models , so that I check the one with more accurate resulst`
+`I choose the Two models so that I check the one with more accurate resulst`
 
 ## 9. Compare the performance of the two models used in parts 6 and 7, using any method suitable. You must include your code.
 
